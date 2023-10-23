@@ -1,0 +1,133 @@
+
+maior_de_2::Int->Int->Int
+maior_de_2 a b
+ | a >= b = a
+ |otherwise = b
+
+ maior_de_2::Int -> Int -> Int
+maior_de_2 a b 
+ | a > b = a
+ |otherwise = b
+maior_de_3::Int -> Int -> Int -> Int
+maior_de_3 a b c = maior_de_2 a (maior_de_2 b c)
+
+maior_de_3::Int->Int->Int->Int
+maior_de_3 x y z
+ |x>= y && x>= z = x
+ |y>= z = y
+ |otherwise = z
+
+ ordena ::(Ord a) => [a] -> [a]
+ordena [] = []
+ordena (x:xs) = insereOrd x (ordena xs)
+insereOrd ::(Ord a) => a -> [a] -> [a]
+insereOrd x [] = [x]
+insereOrd x (y:ys)
+ | x <= y = (x:y:ys)
+ | otherwise = y: (insereOrd x ys)
+
+ fatorial:: Int-> Int
+fatorial 0 = 1
+fatorial n = n * fatorial(n-1)
+
+ordena:: Int->Int->Int->(Int, Int, Int)
+ordena x y z
+ |x >= y && y >= z = (x, y, z)
+ |y >= x && x >= z = (y, x, z)
+ |z >= x && x >= y = (z, x, y)
+ |x >= y && y <= z = (x, z, y)
+ |z >= x && x <= y = (z, y, x)
+ |y >= x && x <= z = (y, z, x)
+
+ fibonacci :: Int -> Integer
+fibonacci 0 = 0
+fibonacci 1 = 1
+fibonacci n = fibonacci (n - 1) + fibonacci (n - 2)
+
+triangula :: Int -> Int -> Int -> Bool
+triangula a b c = (a + b > c) && (a + c > b) && (b + c > a)
+
+multiplica :: Int -> Int -> Int
+multiplica m n
+    | n == 0 = 0
+    | n < 0  = -(multiplica m (-n))
+    | otherwise = m + multiplica m (n - 1)
+
+tamanho :: [Int] -> Int
+tamanho [] = 0
+tamanho (_:xs) = 1 + tamanho xs
+
+reverte:: [Int] -> [Int]
+reverte [] = []
+reverte (x:xs) = xs: reverte x
+
+maior:: [Int] -> Int
+maior [] = 0
+maior [x] = x
+maior (x:y:xs)
+ |x > y = maior (x:xs)
+ |otherwise = maior (y:xs)
+
+verifica :: Int -> [Int] -> Bool
+verifica [] = False
+verifica n (x:xs)
+    | n == x = True
+    | otherwise = verifica n xs
+
+ocorrencia :: Int -> [Int] -> Int
+ocorrencia _ [] = 0
+ocorrencia n (x:xs)
+    | n == x = 1 + ocorrencia n xs
+    | otherwise = ocorrencia n xs
+
+conta_impar :: [Int] -> Int
+conta_impar [] = 0
+conta_impar (x:xs)
+    | impar x = 1 + conta_impar xs
+    | otherwise = conta_impar xs
+
+impar :: Int -> Bool
+impar n = n `mod` 2 /= 0
+
+unica_ocorrencia :: Int -> [Int] -> Bool
+unica_ocorrencia _ [] = False
+unica_ocorrencia n xs = ocorrencia n xs == 1
+
+ocorrencia :: Int -> [Int] -> Int
+ocorrencia _ [] = 0
+ocorrencia n (x:xs)
+    | n == x = 1 + ocorrencia n xs
+    | otherwise = ocorrencia n xs
+
+maiores:: Int -> [Int] -> Int
+maiores _ [] = 0
+maiores n (x:xs)
+ |x > n = 1 + maiores n xs
+ |otherwise = maiores n xs
+
+iguais :: [Int] -> [Int] -> Bool
+iguais [] [] = True
+iguais _ [] = False
+iguais [] _ = False
+iguais (x:xs) (a:b)
+    | x == a && iguais xs b = True
+    | otherwise = False
+
+concatena :: [Int] -> [Int] -> [Int]
+concatena [] ys = ys
+concatena (x:xs) ys = x : concatena xs ys
+
+soma:: [Int] -> Int
+soma [] = 0
+soma (x:xs) = x + soma xs
+
+isprimos :: Int -> Bool
+isprimos n
+    | n <= 1 = False
+    | otherwise = not (any (\x -> n `mod` x == 0) [2..(n-1)])
+
+primos :: [Int] -> [Int]
+primos [] = []
+primos (x:xs)
+    | isprimos x = x : primos xs
+    | otherwise = primos xs
